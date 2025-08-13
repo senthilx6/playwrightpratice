@@ -1,0 +1,43 @@
+class BrowserMangement {
+
+    constructor(properties){
+    this.browser = null;
+    this.context = null;
+    this.pages = [];
+    this.page = null;
+    }
+
+async browser_intialization(browserName , is_headless){
+
+  switch (browserName) {
+    case 'chromium':
+    case 'chrome':
+      this.browser = chromium;
+      break;
+    case 'firefox':
+      this.browser = firefox;
+      break;
+    case 'webkit':
+    case 'safari':
+      this.browser = webkit;
+      break;
+    default:
+      throw new Error(`Unknown browser: ${project.use.browserName}`);
+  }
+
+ await this.browser.launch({ headless: is_headless });
+}
+
+async create_context(){
+      this.context  = await this.browser.newContext();
+}
+
+async create_page(){
+    this.page = await this.context.newPage();
+    this.pages.push(this.page)
+}
+
+
+}
+
+module.exports = BrowserMangement;

@@ -13,16 +13,15 @@ async goto() {
     await this.page.goto(APP_URLS.baseUrl);
   }
 
-async login(username, password) {
-    await this.goto()
+async login(base_url,username, password) {
+    await this.goto(base_url)
     await this.emailObj.type(username)
     await this.password.type(password)
     await this.signinBtn.click()
 }  
 
-async waitFoLoginToComplete(){
+async waitFoLoginToComplete(domain_name){
     try {
-  var domain_name = APP_URLS.baseUrl
   const match = domain_name.match(/^https:\/\/([^\.]+)\./);
   const subdomain = match ? match[1] : null;   
   await expect(this.page.getByText(subdomain)).toBeVisible()
